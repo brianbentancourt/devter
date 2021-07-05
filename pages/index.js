@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import AppLayout from '../components/AppLayout'
+import { colors } from '../styles/theme'
 
 export default function Home() {
   return (
@@ -12,16 +12,36 @@ export default function Home() {
       </Head>
 
       <AppLayout>
-        <h1 >
-          Welcome to <a href="https://nextjs.org">devter!</a>
-        </h1>
-        <nav >
-          <Link href="/timeline">
-            timeline
-          </Link>
-        </nav>
+        <section>
+          <img src='/logo.png' alt='logo' />
+          <h1>Devter</h1>
+          <h2>Talk about development <br /> with developers</h2>
+        </section>
       </AppLayout>
 
+      <style jsx>{`
+        img {
+          width: 120px;
+        }
+
+        section {
+          display: grid;
+          height: 100%;
+          place-content: center;
+          place-items: center;
+        }
+
+        h1 {
+          color: ${colors.primary};
+          font-weight: 800;
+          margin-bottom: 8px;
+        }
+
+        h2 {
+          font-size: 21px;
+        }
+      `}
+      </style>
     </>
   )
 }
