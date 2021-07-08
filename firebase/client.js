@@ -10,10 +10,28 @@ const firebaseConfig = {
     appId: "1:1010418949589:web:ffc20943f21bf7a788f15c"
 }
 
-if (!firebase.apps || !firebase.apps.length)
-    firebase.initializeApp(firebaseConfig)
+!firebase.apps.length && firebase.initializeApp(firebaseConfig)
+
+const mapUserFromFirebaseAuth = (user => {
+    const { displayName, email, photoURL } = user
+    return {
+        avatar: photoURL,
+        userName: displayName,
+        email
+    }
+})
+
+export const onAuthStateChanged = (onChange) =>
+    firebase
+        .auth()
+        .onAuthStateChanged(user => {
+            const normalizedUser = mapUserFromFirebaseAuth(user)
+            onChange(normalizedUser)
+        })
 
 export const loginWithGitHub = () => {
     const githubProvider = new firebase.auth.GithubAuthProvider()
-    return firebase.auth().signInWithPopup(githubProvider)
+    return firebase
+        .auth()
+        .signInWithPopup(githubProvider)
 }
