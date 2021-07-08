@@ -6,7 +6,6 @@ import GitHub from '../components/Icons/GitHub'
 import { colors } from '../styles/theme'
 import { loginWithGitHub, onAuthStateChanged } from '../firebase/client'
 
-
 export default function Home() {
   const [user, setUser] = useState(undefined)
 
@@ -18,7 +17,6 @@ export default function Home() {
     loginWithGitHub()
       .then(user => setUser(user))
       .catch(err => console.error(err))
-
 
   return (
     <>
